@@ -1,0 +1,43 @@
+services:
+  frontend:
+    build:
+      context: ./quiz_frontend
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    depends_on:
+      - backend
+    networks:
+      - quiz-network
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:3000
+
+  backend:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - '3001:3001'
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/quiz-app
+      - APP_PORT=3000
+    networks:
+      - quiz-network
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - '27018:27017'
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - quiz-network
+
+networks:
+  quiz-network:
+    driver: bridge
+
+volumes:
+  mongo-data:

@@ -21,7 +21,6 @@ export default function Quiz(){
     const [questions, setQuestions] = useState<IQuestion[]>([])
     const [score, setScore] = useState<number>(0)
     const [showResults, setShowResults] = useState<boolean>(false)
-    const [question, seQuestion] = useState<IQuestion>()
     const [questionIndex, setQuestionIndex] = useState<number>(0)
     const [selectedAnswerID, setSlectedAnswerID] = useState<string | null>()
 

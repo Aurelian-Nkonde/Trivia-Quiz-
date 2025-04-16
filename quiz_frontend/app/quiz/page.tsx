@@ -24,7 +24,6 @@ export default function Quiz(){
     const [question, seQuestion] = useState<IQuestion>()
     const [questionIndex, setQuestionIndex] = useState<number>(0)
     const [selectedAnswerID, setSlectedAnswerID] = useState<string | null>()
-    const [currentSelectedAnswerId, setCurrentSelectedAnswerId] = useState<string>()
 
     const router = useRouter();
 
@@ -84,10 +83,9 @@ export default function Quiz(){
         })
     } 
 
-    const selectAnswer = (id: string, possibleAnswerId: string) => {
+    const selectAnswer = (possibleAnswerId: string) => {
         console.log(possibleAnswerId)
         setSlectedAnswerID(possibleAnswerId)
-        setCurrentSelectedAnswerId(id)
     }
 
 
@@ -127,28 +125,24 @@ export default function Quiz(){
                                             <h1 className="font-bold text-xl">A: </h1>
                                             <h1 className="text-gray-800 text-xl">{questions[questionIndex].possibleAnswers[0].answer}</h1>
                                         </div>
-                                        <input  onChange={() => selectAnswer(questions[questionIndex]._id,questions[questionIndex].possibleAnswers[0].id)} type="radio" id="first" name="drone" value={questions[questionIndex].possibleAnswers[0].id}/>
+                                        <input  onChange={() => selectAnswer(questions[questionIndex].possibleAnswers[0].id)} type="radio" id="first" name="drone" value={questions[questionIndex].possibleAnswers[0].id}/>
                                     </div>
                                     <div className= {selectedAnswerID == questions[questionIndex].possibleAnswers[1].id? "flex gap-4 justify-between items-center border-orange-400 border-2 py-4 px-4 mb-2 shadow-2xl":"mb-2 flex gap-4 justify-between items-center border-gray-600 border-2 py-4 px-4"}>
                                         <div className="flex gap-3 items-center">
-                                            <h1 className="font-bold text-xl">A: </h1>
+                                            <h1 className="font-bold text-xl">B: </h1>
                                             <h1 className="text-gray-800 text-xl">{questions[questionIndex].possibleAnswers[1].answer}</h1>
                                         </div>
-                                        <input onChange={() => selectAnswer(questions[questionIndex]._id,questions[questionIndex].possibleAnswers[1].id)} type="radio" id="second" name="drone" value={questions[questionIndex].possibleAnswers[1].id}/>
+                                        <input onChange={() => selectAnswer(questions[questionIndex].possibleAnswers[1].id)} type="radio" id="second" name="drone" value={questions[questionIndex].possibleAnswers[1].id}/>
                                     </div>
                                     <div className= {selectedAnswerID == questions[questionIndex].possibleAnswers[2].id? "flex gap-4 justify-between items-center border-orange-400 border-2 py-4 px-4 shadow-2xl":"flex gap-4 justify-between items-center border-gray-600 border-2 py-4 px-4"}>
                                         <div className="flex gap-3 items-center">
-                                            <h1 className="font-bold text-xl">A: </h1>
+                                            <h1 className="font-bold text-xl">C: </h1>
                                             <h1 className="text-gray-800 text-xl">{questions[questionIndex].possibleAnswers[2].answer}</h1>
                                         </div>
-                                        <input onChange={() => selectAnswer(questions[questionIndex]._id,questions[questionIndex].possibleAnswers[2].id)} type="radio" id="third" name="drone" value={questions[questionIndex].possibleAnswers[2].id}/>
+                                        <input onChange={() => selectAnswer(questions[questionIndex].possibleAnswers[2].id)} type="radio" id="third" name="drone" value={questions[questionIndex].possibleAnswers[2].id}/>
                                     </div>
                                 </fieldset>
-                                <div className="flex flex-col mt-2">
-                                    <h1 className="text-center">Timer counting_down:</h1>
-                                    <h2 className="text-center">30:00</h2>
-                                </div>
-                                <div className="flex justify-center mt-3">
+                                <div className="flex justify-center mt-6">
                                     <button  onClick={nextQuestion} className=" border-black border-2 py-2 px-5 cursor-pointer">Next Question</button>
                                 </div>
                             </div>

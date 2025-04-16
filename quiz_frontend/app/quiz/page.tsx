@@ -29,7 +29,7 @@ export default function Quiz(){
 
     const getUserName = () => {
         if(username == ""){
-            toast.error('Oops, The username must not be empty!')
+            toast.error('Oops, The username must not be empty!.')
             return
         }
         SetRenderUserName(false)
